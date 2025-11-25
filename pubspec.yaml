@@ -9,8 +9,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  noise_meter: ^5.0.1
+  noise_meter: ^5.0.1  # DB 측정기용
   permission_handler: ^11.3.1
+  flutter_recorder: ^1.1.2  # 주파수 분석용
 
 dev_dependencies:
   flutter_test:

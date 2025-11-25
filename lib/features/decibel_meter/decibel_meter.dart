@@ -4,8 +4,10 @@ import 'package:permission_handler/permission_handler.dart';
 import 'dart:async';
 
 class DecibelMeter extends StatefulWidget {
+  const DecibelMeter({super.key});
+
   @override
-  _DecibelMeterState createState() => _DecibelMeterState();
+  State<DecibelMeter> createState() => _DecibelMeterState();
 }
 
 class _DecibelMeterState extends State<DecibelMeter> {
@@ -16,6 +18,7 @@ class _DecibelMeterState extends State<DecibelMeter> {
   Future<void> _startListening() async {
     // 마이크 권한 요청
     var status = await Permission.microphone.request();
+    if (!mounted) return;
     if (status.isGranted) {
       _noiseSubscription = NoiseMeter().noise.listen(
         (NoiseReading noiseReading) {
@@ -24,7 +27,7 @@ class _DecibelMeterState extends State<DecibelMeter> {
           });
         },
         onError: (error) {
-          print('오류: $error');
+          debugPrint('오류: $error');
         },
       );
       setState(() {

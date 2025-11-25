@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'features/decibel_meter/decibel_home.dart';
+import 'features/frequency_analyzer/frequency_analyzer_home.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: '에듀 사운드랩',  // 어플 정보임.
-      home: HomePage(),
+      home: const HomePage(),
     );
   }
 }
@@ -28,6 +30,8 @@ class MenuItem {
 }
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -41,17 +45,21 @@ class _HomePageState extends State<HomePage> {
     MenuItem(
       title: "데시벨 미터",
       icon: Icons.mic,
-      page: DecibelMeterHome(),  // lib/features/decibel_meter/decibel_home.dart 에 정의된 위젯 사용
+      page: const DecibelMeterHome(),  // lib/features/decibel_meter/decibel_home.dart 에 정의된 위젯 사용
     ),
     MenuItem(
+      title: "주파수 분석",
+      icon: Icons.noise_aware,
+      page: FrequencyAnalyzerHome(),
+    ),    MenuItem(
       title: "푸리에 분석",
       icon: Icons.equalizer,
-      page: Center(child: Text('푸리푸푸푸', style: TextStyle(fontSize: 24))),
+      page: const Center(child: Text('푸리푸푸푸', style: TextStyle(fontSize: 24))),
     ),
     MenuItem(
       title: "about",
       icon: Icons.settings,
-      page: Center(child: Text('나중에 관련 설명들 다 여기에?', style: TextStyle(fontSize: 24))),
+      page: const Center(child: Text('나중에 관련 설명들 다 여기에?', style: TextStyle(fontSize: 24))),
     ),
   ];
 

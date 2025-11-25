@@ -1,7 +1,6 @@
+import 'package:edu_sound_lab/features/frequency_analyzer/frequency_meter.dart';
 import 'package:flutter/material.dart';
 
-import 'decibel_meter.dart';
-import 'decibel_battle.dart';
 
 // ① BottomNavigationBar 메뉴 항목을 구조화 (Drawer MenuItem과 유사)
 // ───────────────────────────────────────
@@ -17,28 +16,29 @@ class TabItem {
   });
 }
 
-class DecibelMeterHome extends StatefulWidget {
-  const DecibelMeterHome({super.key});
-
+class FrequencyAnalyzerHome extends StatefulWidget {
+  const FrequencyAnalyzerHome({super.key});
   @override
-  State<DecibelMeterHome> createState() => _DecibelMeterHomeState();
+  State<FrequencyAnalyzerHome> createState() => _FrequencyAnalyzerHomeState();
 }
 
-class _DecibelMeterHomeState extends State<DecibelMeterHome> {
+class _FrequencyAnalyzerHomeState extends State<FrequencyAnalyzerHome> {
   int _selectedIndex = 0; // 현재 선택된 탭
 
   // ② 탭 데이터를 한 곳에서 정의 (main.dart의 menuItems와 유사)
   // ───────────────────────────────────────
   late final List<TabItem> tabItems = [
     TabItem(
-      label: "데시벨 미터",
+      label: "Frequency Meter",
       icon: Icons.mic,
-      page: const DecibelMeter(),
+      page: const FrequencyMeter(),
     ),
     TabItem(
       label: "배틀!!",
       icon: Icons.whatshot,
-      page: const DecibelBattle(),
+      page: const Center(
+        child: Text('추후 만들자.', style: TextStyle(fontSize: 24)),
+      ),
     ),
     TabItem(
       label: "미정.",

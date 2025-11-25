@@ -4,8 +4,10 @@ import 'package:permission_handler/permission_handler.dart';
 import 'dart:async';
 
 class DecibelBattle extends StatefulWidget {
+  const DecibelBattle({super.key});
+
   @override
-  _DecibelBattleState createState() => _DecibelBattleState();
+  State<DecibelBattle> createState() => _DecibelBattleState();
 }
 
 class _DecibelBattleState extends State<DecibelBattle> {
@@ -20,7 +22,7 @@ class _DecibelBattleState extends State<DecibelBattle> {
   Timer? _countdownTimer;
   
   // 배틀 기록을 저장할 리스트
-  List<BattleRecord> _battleRecords = [];
+  final List<BattleRecord> _battleRecords = [];
 
   Future<void> _startBattle() async {
     if (_nameController.text.trim().isEmpty) {
@@ -32,6 +34,7 @@ class _DecibelBattleState extends State<DecibelBattle> {
 
     // 마이크 권한 요청
     var status = await Permission.microphone.request();
+    if (!mounted) return;
     if (!status.isGranted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('마이크 권한이 필요합니다!')),
@@ -71,7 +74,7 @@ class _DecibelBattleState extends State<DecibelBattle> {
         });
       },
       onError: (error) {
-        print('오류: $error');
+        debugPrint('오류: $error');
       },
     );
 
