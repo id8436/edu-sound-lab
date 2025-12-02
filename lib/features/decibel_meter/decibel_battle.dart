@@ -208,11 +208,8 @@ class _DecibelBattleState extends State<DecibelBattle> {
             child: ElevatedButton.icon(
               onPressed: _isRecording ? null : _startBattle,
               icon: Icon(_isRecording ? Icons.mic : Icons.play_arrow),
-              label: Flexible(
-                child: Text(
-                  _isRecording ? '측정 중...' : '시작!',
-                  overflow: TextOverflow.ellipsis,
-                ),
+              label: Text(
+                _isRecording ? '측정 중...' : '시작!',
               ),
               style: ElevatedButton.styleFrom(
                 padding: EdgeInsets.symmetric(vertical: 16, horizontal: 20),
@@ -232,26 +229,17 @@ class _DecibelBattleState extends State<DecibelBattle> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Flexible(
-                      flex: 2,
-                      child: Text(
-                        '배틀 기록 🏆',
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                    Text(
+                      '배틀 기록 🏆',
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     if (_battleRecords.isNotEmpty)
-                      Flexible(
-                        child: TextButton.icon(
-                          onPressed: _clearRecords,
-                          icon: Icon(Icons.clear_all, size: 16),
-                          label: Text(
-                            '삭제',
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          style: TextButton.styleFrom(
-                            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                          ),
+                      TextButton.icon(
+                        onPressed: _clearRecords,
+                        icon: Icon(Icons.clear_all, size: 16),
+                        label: Text('삭제'),
+                        style: TextButton.styleFrom(
+                          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                         ),
                       ),
                   ],
@@ -299,25 +287,22 @@ class _DecibelBattleState extends State<DecibelBattle> {
                                   _formatTimestamp(record.timestamp),
                                   style: TextStyle(fontSize: 12),
                                 ),
-                                trailing: ConstrainedBox(
-                                  constraints: BoxConstraints(maxWidth: 80),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      if (isFirst) Icon(Icons.emoji_events, color: Colors.yellow[700], size: 16),
-                                      FittedBox(
-                                        child: Text(
-                                          '${record.maxDecibel.toInt()} dB',
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.bold,
-                                            color: isFirst ? Colors.yellow[700] : Colors.black87,
-                                          ),
-                                        ),
+                                trailing: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    if (isFirst) 
+                                      Icon(Icons.emoji_events, color: Colors.yellow[700], size: 16),
+                                    Text(
+                                      '${record.maxDecibel.toInt()} dB',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                        color: isFirst ? Colors.yellow[700] : Colors.black87,
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             );

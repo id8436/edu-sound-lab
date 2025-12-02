@@ -12,6 +12,7 @@ dependencies:
   noise_meter: ^5.0.1  # DB 측정기용
   permission_handler: ^11.3.1
   flutter_recorder: ^1.1.2  # 주파수 분석용
+  fl_chart: ^0.66.2  # 차트 라이브러리
 
 dev_dependencies:
   flutter_test:

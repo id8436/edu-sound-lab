@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'decibel_meter.dart';
-import 'decibel_battle.dart';
-import 'decibel_alert.dart';
+import 'wave_generator.dart';
 
 // ① BottomNavigationBar 메뉴 항목을 구조화 (Drawer MenuItem과 유사)
 // ───────────────────────────────────────
@@ -18,33 +15,31 @@ class TabItem {
   });
 }
 
-class DecibelMeterHome extends StatefulWidget {
-  const DecibelMeterHome({super.key});
-
+class WaveGeneratorHome extends StatefulWidget {
+  const WaveGeneratorHome({super.key});
   @override
-  State<DecibelMeterHome> createState() => _DecibelMeterHomeState();
+  State<WaveGeneratorHome> createState() => _WaveGeneratorHomeState();
 }
 
-class _DecibelMeterHomeState extends State<DecibelMeterHome> {
+class _WaveGeneratorHomeState extends State<WaveGeneratorHome> {
   int _selectedIndex = 0; // 현재 선택된 탭
 
   // ② 탭 데이터를 한 곳에서 정의 (main.dart의 menuItems와 유사)
   // ───────────────────────────────────────
   late final List<TabItem> tabItems = [
     TabItem(
-      label: "데시벨 미터",
-      icon: Icons.mic,
-      page: const DecibelMeter(),
+      label: "웨이브 생성기",
+      icon: Icons.graphic_eq,
+      page: const WaveGenerator(),
     ),
     TabItem(
-      label: "배틀!!",
-      icon: Icons.whatshot,
-      page: const DecibelBattle(),
-    ),
-    TabItem(
-      label: "소리경고!",
-      icon: Icons.notification_important,
-      page: const DecibelAlert(),
+      label: "설정",
+      icon: Icons.settings,
+      page: const Center(
+        child: Text('설정 화면\n(추후 구현)', 
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 24)),
+      ),
     ),
   ];
 
