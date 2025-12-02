@@ -13,6 +13,7 @@ dependencies:
   permission_handler: ^11.3.1
   flutter_recorder: ^1.1.2  # 주파수 분석용
   fl_chart: ^0.66.2  # 차트 라이브러리
+  flutter_sound: ^9.2.13  # 파형 생성용
 
 dev_dependencies:
   flutter_test:

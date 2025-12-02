@@ -79,33 +79,86 @@ class _DecibelMeterState extends State<DecibelMeter> {
     super.dispose();
   }
 
+  TableRow _buildTableRow(String db, String description, Color? bgColor) {
+    return TableRow(
+      decoration: BoxDecoration(color: bgColor),
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            db,
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            description,
+            style: TextStyle(fontSize: 13),
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          // 현재 데시벨 표시
-          Card(
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                children: [
-                  Text(
-                    '${_currentDB.toInt()} dB',
-                    style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    _isListening ? '측정 중...' : '측정 중지됨',
-                    style: TextStyle(fontSize: 16, color: Colors.grey[600]),
-                  ),
-                ],
+    return SingleChildScrollView(
+      
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // 사용 가이드
+            Card(
+              color: Colors.blue[50],
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(Icons.info_outline, color: Colors.blue[700], size: 20),
+                        SizedBox(width: 8),
+                        Text('이용 가이드', 
+                             style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue[700])),
+                      ],
+                    ),
+                    SizedBox(height: 8),
+                    Text('• 기기 한계: 마이크 하드웨어 제한으로 스마트폰마다 측정 한계가 다릅니다.', 
+                         style: TextStyle(fontSize: 13, color: Colors.grey[700])),
+                    Text('• 정밀도: 교육용으론 충분하지만, 연구용으론 전문 장비를 구하시기 바랍니다.', 
+                         style: TextStyle(fontSize: 13, color: Colors.grey[700])),
+                  ],
+                ),
               ),
             ),
-          ),
 
-          SizedBox(height: 20),
+            SizedBox(height: 20),
+            // 현재 데시벨 표시
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  children: [
+                    Text(
+                      '${_currentDB.toInt()} dB',
+                      style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      _isListening ? '측정 중...' : '측정 중지됨',
+                      style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            SizedBox(height: 16),
+
 
           // 컨트롤 버튼
           ElevatedButton.icon(
@@ -119,28 +172,29 @@ class _DecibelMeterState extends State<DecibelMeter> {
             ),
           ),
 
+
           SizedBox(height: 20),
 
           // 실시간 그래프
-          Expanded(
-            child: Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          '실시간 데시벨 그래프',
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 16),
-                    Expanded(
-                      child: _dbHistory.isEmpty
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '실시간 데시벨 그래프',
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 16),
+                  SizedBox(
+                    height: 300,
+                    child: _dbHistory.isEmpty
                           ? Center(
                               child: Text(
                                 '측정을 시작하면 실시간 그래프가 표시됩니다.',
@@ -242,14 +296,58 @@ class _DecibelMeterState extends State<DecibelMeter> {
                                 ],
                               ),
                             ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          
+          SizedBox(height: 20),
+
+          // 데시벨 기준표
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '데시벨 기준표',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 12),
+                  Table(
+                    border: TableBorder.all(color: Colors.grey[300]!, width: 1),
+                    columnWidths: const {
+                      0: FlexColumnWidth(1),
+                      1: FlexColumnWidth(2),
+                    },
+                    children: [
+                      _buildTableRow('30dB', '속삭임, 조용한 도서관', Colors.green[50]),
+                      _buildTableRow('40dB', '냉장고 소음, 조용한 사무실', Colors.green[100]),
+                      _buildTableRow('50dB', '조용한 거리, 에어컨 소리', Colors.lightGreen[100]),
+                      _buildTableRow('60dB', '일반 대화, 레스토랑', Colors.yellow[100]),
+                      _buildTableRow('70dB', '청소기, 전화벨 소리', Colors.orange[100]),
+                      _buildTableRow('80dB', '시끄러운 거리, 알람시계', Colors.orange[200]),
+                      _buildTableRow('90dB', '지하철, 오토바이 소리', Colors.deepOrange[200]),
+                      _buildTableRow('100dB', '공사장, 전동 공구', Colors.red[200]),
+                      _buildTableRow('110dB', '록 콘서트, 클럽 음악', Colors.red[300]),
+                      _buildTableRow('120dB', '제트기 이륙, 사이렌', Colors.red[400]),
+                    ],
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    '※ 85dB 이상은 장시간 노출 시 청력 손상 위험',
+                    style: TextStyle(fontSize: 12, color: Colors.red[700], fontWeight: FontWeight.bold),
+                  ),
+                ],
               ),
             ),
           ),
         ],
       ),
+    ),
     );
   }
 }

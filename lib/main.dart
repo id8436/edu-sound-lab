@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'features/decibel_meter/decibel_home.dart';
 import 'features/frequency_analyzer/frequency_analyzer_home.dart';
+import 'features/fourier_analyzer/fourier_analyzer_home.dart';
 import 'features/wave_generator/wave_home.dart';
 
 void main() => runApp(const MyApp());
@@ -52,11 +53,13 @@ class _HomePageState extends State<HomePage> {
       title: "주파수 미터",
       icon: Icons.noise_aware,
       page: FrequencyAnalyzerHome(),
-    ),    MenuItem(
+    ),    
+    MenuItem(
       title: "푸리에 분석",
       icon: Icons.equalizer,
-      page: const Center(child: Text('푸리푸푸푸', style: TextStyle(fontSize: 24))),
-    ),    MenuItem(
+      page: FourierAnalyzerHome(),
+    ),    
+    MenuItem(
       title: "주파수 발생기",
       icon: Icons.volume_up,
       page: const WaveGeneratorHome()

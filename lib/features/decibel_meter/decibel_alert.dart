@@ -237,6 +237,38 @@ class _DecibelAlertState extends State<DecibelAlert> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+
+          // 이용 가이드
+          Card(
+            color: Colors.blue[50],
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Icon(Icons.info_outline, color: Colors.blue[700], size: 20),
+                      SizedBox(width: 8),
+                      Text('이용 가이드', 
+                           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue[700])),
+                    ],
+                  ),
+                  SizedBox(height: 8),
+                  Text('• 임계값을 설정하고 모니터링을 시작하세요', 
+                       style: TextStyle(fontSize: 13, color: Colors.grey[700])),
+                  Text('• 소음이 설정값을 초과하면 자동으로 경고', 
+                       style: TextStyle(fontSize: 13, color: Colors.grey[700])),
+                  Text('• 경고음과 함께 팝업 알림이 표시됩니다', 
+                       style: TextStyle(fontSize: 13, color: Colors.grey[700])),
+                  Text('• 그래프의 빨간 점선은 임계값 기준선입니다', 
+                       style: TextStyle(fontSize: 13, color: Colors.grey[700])),
+                ],
+              ),
+            ),
+          ),
+
+          const SizedBox(height: 20),
           // 임계값 설정 카드
           Card(
             child: Padding(
@@ -281,7 +313,9 @@ class _DecibelAlertState extends State<DecibelAlert> {
             ),
           ),
 
-          const SizedBox(height: 20),
+          const SizedBox(height: 16),
+
+
 
           // 현재 데시벨 표시
           Card(

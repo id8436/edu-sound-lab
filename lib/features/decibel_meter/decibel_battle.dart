@@ -146,6 +146,38 @@ class _DecibelBattleState extends State<DecibelBattle> {
               ),
             ),
           ),
+
+          SizedBox(height: 16),
+
+          // 사용 가이드
+          Card(
+            color: Colors.blue[50],
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Icon(Icons.info_outline, color: Colors.blue[700], size: 20),
+                      SizedBox(width: 8),
+                      Text('이용 가이드', 
+                           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue[700])),
+                    ],
+                  ),
+                  SizedBox(height: 8),
+                  Text('• 이름 입력 → 시작 버튼 클릭', 
+                       style: TextStyle(fontSize: 13, color: Colors.grey[700])),
+                  Text('• 3초 카운트다운 후 자동 측정 시작 (3초간)', 
+                       style: TextStyle(fontSize: 13, color: Colors.grey[700])),
+                  Text('• 측정 시간 동안 최대한 큰 소리를 내세요!', 
+                       style: TextStyle(fontSize: 13, color: Colors.grey[700])),
+                  Text('• 스마트폰 기기 한계로 인해 측정 한계값이 있습니다. 그런 경우, 거리를 떨어뜨려 진행하세요.', 
+                       style: TextStyle(fontSize: 13, color: Colors.grey[700])),
+                ],
+              ),
+            ),
+          ),
           
           SizedBox(height: 20),
 
